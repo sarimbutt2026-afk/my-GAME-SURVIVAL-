@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Island Survival Simulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="startScreen" class="screen home-screen">
+      <div class="home-card">
+        <span class="badge">SURVIVAL MODE</span>
+        <h1>Island Survival Simulator</h1>
+        <p>
+          You crash-land on a mysterious island. Gather resources, build a shelter,
+          explore hidden places, complete missions, and survive.
+        </p>
+        <button id="startGameBtn" class="primary-btn large-btn">START SURVIVAL</button>
+        <div class="home-tags">
+          <span>🌴 Gather</span>
+          <span>🏠 Build</span>
+          <span>🗺️ Explore</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="gameScreen" class="screen hidden">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-icon">🏝️</span>
+          <div>
+            <h2>Island Escape</h2>
+            <small>Stranded survivor</small>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button id="newGameBtn" class="secondary-btn">NEW GAME</button>
+          <button id="mysteryIslandBtn" class="special-btn hidden">Mystery Island</button>
+        </div>
+      </header>
+
+      <div class="status-bar">
+        <div class="stat-card health">
+          <span>❤️</span>
+          <div>
+            <small>Health</small>
+            <strong id="healthValue">100</strong>
+          </div>
+        </div>
+        <div class="stat-card food">
+          <span>🍖</span>
+          <div>
+            <small>Food</small>
+            <strong id="foodValue">20</strong>
+          </div>
+        </div>
+        <div class="stat-card water">
+          <span>💧</span>
+          <div>
+            <small>Water</small>
+            <strong id="waterValue">20</strong>
+          </div>
+        </div>
+        <div class="stat-card wood">
+          <span>🪵</span>
+          <div>
+            <small>Wood</small>
+            <strong id="woodValue">0</strong>
+          </div>
+        </div>
+        <div class="stat-card stone">
+          <span>🪨</span>
+          <div>
+            <small>Stone</small>
+            <strong id="stoneValue">0</strong>
+          </div>
+        </div>
+        <div class="stat-card coins">
+          <span>🪙</span>
+          <div>
+            <small>Coins</small>
+            <strong id="coinsValue">0</strong>
+          </div>
+        </div>
+        <div class="stat-card xp">
+          <span>⭐</span>
+          <div>
+            <small>XP</small>
+            <strong id="xpValue">0</strong>
+          </div>
+        </div>
+        <div class="stat-card level">
+          <span>🏅</span>
+          <div>
+            <small>Level</small>
+            <strong id="levelValue">1</strong>
+          </div>
+        </div>
+        <div class="stat-card day">
+          <span>📅</span>
+          <div>
+            <small>Day</small>
+            <strong id="dayValue">1</strong>
+          </div>
+        </div>
+      </div>
+
+      <main class="game-layout">
+        <aside class="panel action-panel">
+          <h3>Survival Actions</h3>
+          <div class="action-grid">
+            <button class="action-btn" data-action="wood">🌳 Collect Wood</button>
+            <button class="action-btn" data-action="stone">🪨 Collect Stone</button>
+            <button class="action-btn" data-action="food">🥕 Find Food</button>
+            <button class="action-btn" data-action="water">💧 Collect Water</button>
+            <button class="action-btn" data-action="explore">🗺️ Explore Island</button>
+            <button class="action-btn" data-action="missions">🎯 Missions</button>
+            <button class="action-btn" data-action="inventory">🎒 Inventory</button>
+            <button class="action-btn" data-action="achievements">🏆 Achievements</button>
+          </div>
+
+          <div class="build-section">
+            <h3>Build Structures</h3>
+            <button class="build-btn" data-build="shelter">🏠 Build Shelter</button>
+            <button class="build-btn" data-build="campfire">🔥 Build Campfire</button>
+            <button class="build-btn" data-build="storage">📦 Build Storage</button>
+            <button class="build-btn" data-build="farm">🌾 Small Farm</button>
+            <button class="build-btn" data-build="waterCollector">💧 Water Collector</button>
+          </div>
+        </aside>
+
+        <section class="center-panel">
+          <div class="scene-card">
+            <div class="scene-header">
+              <div class="location-pill" id="locationTag">🌴 Island Camp</div>
+              <div class="day-badge" id="headerDayLabel">Day 1</div>
+            </div>
+
+            <div id="islandScene" class="island-scene">
+              <div class="sun"></div>
+              <div class="moon"></div>
+              <div class="cloud cloud-one"></div>
+              <div class="cloud cloud-two"></div>
+              <div class="rain-layer"></div>
+              <div class="island-art">
+                <div class="water-ring"></div>
+                <div class="island-base"></div>
+                <div class="tree tree-one">🌴</div>
+                <div class="tree tree-two">🌴</div>
+                <div class="tree tree-three">🌴</div>
+                <div id="sceneObjects" class="scene-objects"></div>
+                <div id="actionEffects" class="action-effects"></div>
+                <div id="playerAvatar" class="player-avatar">🧭</div>
+              </div>
+              <div id="miniMap" class="mini-map"></div>
+            </div>
+
+            <div class="event-box">
+              <h3>Island Log</h3>
+              <p id="eventText">You wake up on a quiet tropical beach and plan your next move.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel side-panel">
+          <div class="side-section">
+            <div class="section-header">
+              <h3>🎯 Missions</h3>
+              <button id="missionRefreshBtn" class="tiny-btn">Refresh</button>
+            </div>
+            <ul id="missionsList" class="mission-list"></ul>
+          </div>
+
+          <div class="side-section">
+            <div class="section-header">
+              <h3>🎒 Inventory</h3>
+              <button id="inventoryToggleBtn" class="tiny-btn">Toggle</button>
+            </div>
+            <div id="inventoryPanel" class="info-list"></div>
+          </div>
+
+          <div class="side-section">
+            <div class="section-header">
+              <h3>🏆 Achievements</h3>
+            </div>
+            <div id="achievementsList" class="info-list"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
